@@ -6,8 +6,9 @@ canvas {
     height: auto;
 }
 
-.container {
+.col-custom {
     max-width: calc(var(--bs-gutter-x) * .5 * 2 + 480px);
+    align-content: flex-start;
 }
 .slider-container {
     display: flex;
