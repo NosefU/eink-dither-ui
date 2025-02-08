@@ -23,12 +23,14 @@
                         </h2>
                         <div id="ditheringSettings" class="accordion-collapse collapse show">
                             <div class="accordion-body">
-                                <select id="algorithmSelect" class="form-select w-100">
-                                    <option value="ordered">Ordered</option>
-                                    <option value="diffusion">Diffusion</option>
-                                    <option value="atkinson">Atkinson</option>
-                                </select>
-
+                                <div class="slider-container">
+                                    <label for="algorithmSelect" class="form-label">Алгоритм</label>
+                                    <select id="algorithmSelect" class="form-select">
+                                        <option value="ordered">Ordered</option>
+                                        <option value="diffusion">Diffusion</option>
+                                        <option value="atkinson">Atkinson</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -48,7 +50,7 @@
                                     <label for="midtoneSlider" class="form-label">Средние</label>
                                     <input type="range" id="midtoneSlider" class="form-range range-slider" min="0" max="255" value="128" data-zero_point="128">
                                 </div>
-                                <div class="mb-3 slider-container">
+                                <div class="slider-container">
                                     <label for="highlightSlider" class="form-label">Света</label>
                                     <input type="range" id="highlightSlider" class="form-range range-slider" min="0" max="255" value="255" data-zero_point="255">
                                 </div>
