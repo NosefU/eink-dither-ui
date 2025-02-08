@@ -24,6 +24,14 @@
                         <div id="ditheringSettings" class="accordion-collapse collapse show">
                             <div class="accordion-body">
                                 <div class="slider-container mb-3">
+                                    <label for="paletteSelect" class="form-label">Палитра</label>
+                                    <select id="paletteSelect" class="form-select">
+                                        <option value="paletteRBW">Red, Black, White</option>
+                                        <option value="paletteNES15">NES 15 colors</option>
+                                        <option value="paletteNES54">NES 54 colors</option>
+                                    </select>
+                                </div>
+                                <div class="slider-container mb-3">
                                     <label for="algorithmSelect" class="form-label">Алгоритм</label>
                                     <select id="algorithmSelect" class="form-select">
                                         <option value="ordered">Ordered</option>
@@ -77,6 +85,7 @@
     <script src="https://cdn.jsdelivr.net/gh/danielepiccone/ditherjs/dist/ditherjs.dist.js"></script>
     <script src="./static/style.js"></script>
     <script src="./static/image-processing.js"></script>
+    <script src="./static/palettes.js"></script>
     <script src="./static/dither.js"></script>
     <script src="./static/levels.js"></script>
 </body>

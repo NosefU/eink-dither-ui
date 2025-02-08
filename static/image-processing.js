@@ -1,6 +1,7 @@
 const imageInput = document.getElementById('imageInput');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const paletteSelect = document.getElementById('paletteSelect');
 const algorithmSelect = document.getElementById('algorithmSelect');
 const cellSizeInput = document.getElementById('cellSize');
 const shadowSlider = document.getElementById('shadowSlider');
@@ -11,6 +12,7 @@ window.originalImageData = null;
 
 
 imageInput.addEventListener('change', handleImageUpload);
+paletteSelect.addEventListener('change', handlePaletteChange);
 algorithmSelect.addEventListener('change', handleAlgorithmChange);
 shadowSlider.addEventListener('input', updateImage);
 cellSizeInput.addEventListener('input', handleCellSizeChange);
@@ -63,6 +65,12 @@ function handleAlgorithmChange() {
   applyDither(imageData);
 
   ctx.putImageData(imageData, 0, 0);
+}
+
+function handlePaletteChange() {
+  if (!window.originalImageData) return;
+
+  updateImage();
 }
 
 function handleCellSizeChange() {

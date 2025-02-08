@@ -1,13 +1,14 @@
-const palette = [
-  [255, 255, 255], // Белый
-  [0, 0, 0],       // Чёрный
-  [255, 0, 0]      // Красный
-];
 const ditherjs = new DitherJS();
+const palettes = {
+  "paletteRBW": paletteRBW,
+  "paletteNES15": paletteNES15,
+  "paletteNES54": paletteNES54,
+}
 
 function applyDither(imageData) {
   const algorithm = algorithmSelect.value;
   const cellSize = Number(cellSizeInput.value || Math.floor(Math.max(1, cellSizeInput.min)));
+  const palette = palettes[paletteSelect.value];
 
   ditherjs.ditherImageData(imageData, {
     "step": cellSize,
