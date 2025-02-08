@@ -23,13 +23,17 @@
                         </h2>
                         <div id="ditheringSettings" class="accordion-collapse collapse show">
                             <div class="accordion-body">
-                                <div class="slider-container">
+                                <div class="slider-container mb-3">
                                     <label for="algorithmSelect" class="form-label">Алгоритм</label>
                                     <select id="algorithmSelect" class="form-select">
                                         <option value="ordered">Ordered</option>
                                         <option value="diffusion">Diffusion</option>
                                         <option value="atkinson">Atkinson</option>
                                     </select>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="cellSize" class="form-label">Шаг сетки</label>
+                                    <input type="number" id="cellSize" class="form-control"  min="1" max="10" value="1" step="1" />
                                 </div>
                             </div>
                         </div>
