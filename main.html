@@ -5,65 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дизеринг изображения</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            touch-action: manipulation;
-        }
-        canvas {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .container {
-            max-width: calc(var(--bs-gutter-x)* .5* 2 + 480px);
-        }
-        .slider-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .slider-container label {
-            flex: 1;
-            text-align: left;
-        }
-        .slider-container input {
-            flex: 3;
-        }
-
-        .range-slider {
-            width: 100%;
-            appearance: none;
-            height: 10px;
-            border-radius: 5px;
-            outline: none;
-            transition: background 0.15s ease-in-out;
-        }
-
-        /*Chrome*/
-        input[type='range']::-webkit-slider-runnable-track {
-            border: 1px solid #DEDEDEFF;
-            background: linear-gradient(to right,
-            #F8F9FAFF var(--fill-start),
-            #007bff var(--fill-start),
-            #007bff var(--fill-end),
-            #F8F9FAFF var(--fill-end));
-            transition: background 0.1s ease-in-out;
-        }
-
-        /** FF*/
-        /*input[type="range"]::-moz-range-progress {*/
-        /*    background-color: #43e5f7;*/
-        /*}*/
-        input[type="range"]::-moz-range-track {
-            border: 1px solid #DEDEDEFF;
-            background: linear-gradient(to right,
-            #F8F9FAFF var(--fill-start),
-            #007bff var(--fill-start),
-            #007bff var(--fill-end),
-            #F8F9FAFF var(--fill-end));
-            transition: background 0.1s ease-in-out;
-        }
-    </style>
+    <link href="/static/styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="container py-4">
