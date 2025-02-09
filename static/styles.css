@@ -11,6 +11,10 @@ canvas {
     align-content: flex-start;
 }
 
+.accordion-button .badge {
+    font-size: 0.6em;
+}
+
 .form-select {
     flex: 3;
 }

@@ -17,6 +17,23 @@
                 <div class="accordion" id="imageSettings">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bleControls" aria-expanded="true" aria-controls="bleControls">
+                                Bluetooth
+                                <span id="bleStatusBadge" class="badge rounded-pill text-bg-danger ms-2">Disconnected</span>
+                            </button>
+
+                        </h2>
+                        <div id="bleControls" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <div class="slider-container">
+                                    <button type="button" id="bleSend" class="btn btn-success" disabled>Send image</button>
+                                    <button type="button" id="bleConnect" class="btn btn-primary">Connect</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ditheringSettings" aria-expanded="true" aria-controls="ditheringSettings">
                                 Dithering settings
                             </button>
@@ -72,9 +89,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <div class="col-12 col-md-6 col-custom">
                 <div class="text-center">
@@ -91,5 +106,6 @@
     <script src="./static/palettes.js"></script>
     <script src="./static/dither.js"></script>
     <script src="./static/levels.js"></script>
+    <script src="./static/ble.js"></script>
 </body>
 </html>
