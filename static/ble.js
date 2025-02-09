@@ -63,13 +63,20 @@ bleConnectBtn.addEventListener('click', async () => {
 
 bleSendBtn.addEventListener('click', async () => {
     if (!characteristic) return;
+    if (!canvas || !window.originalImageData) return;
 
-    let byteArray = new Uint8Array([1, 2, 3, 4, 5]); // Пример байтового массива
+    const { blackBits, redBits } = getBitArraysFromCanvas(canvas);
 
     let oldBtnCaption = bleSendBtn.textContent;
     bleSendBtn.disabled = true;
     try {
-        await characteristic.writeValue(byteArray);
+        const chunkSize = 512;  // Максимальный размер пакета
+
+        for (let i = 0; i < blackBits.length; i += chunkSize) {
+            let chunk = blackBits.slice(i, i + chunkSize);
+            await characteristic.writeValue(chunk);
+        }
+
         bleSendBtn.textContent = '✅ Image sent';
         setTimeout(function() {
             bleSendBtn.textContent = oldBtnCaption;
@@ -93,6 +100,34 @@ function clearClasses(node, prefix) {
             node.classList.remove(className);
         }
     });
+}
 
 
+function getBitArraysFromCanvas(canvas) {
+    const ctx = canvas.getContext("2d");
+    const { width, height } = canvas;
+    const imageData = ctx.getImageData(0, 0, width, height).data;
+
+    const blackBits = new Uint8Array(Math.ceil((width * height) / 8));
+    const redBits = new Uint8Array(Math.ceil((width * height) / 8));
+
+    for (let i = 0; i < width * height; i++) {
+        const index = i * 4;
+        const r = imageData[index];
+        const g = imageData[index + 1];
+        const b = imageData[index + 2];
+
+        const bitIndex = i % 8;
+        const byteIndex = Math.floor(i / 8);
+
+        if (r === 0 && g === 0 && b === 0) {
+            blackBits[byteIndex] |= (1 << bitIndex);
+        }
+
+        if (r > 128 && g < 64 && b < 64) {
+            redBits[byteIndex] |= (1 << bitIndex);
+        }
+    }
+
+    return { blackBits, redBits };
 }
