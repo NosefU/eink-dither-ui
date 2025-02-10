@@ -7,6 +7,10 @@ const bleSendBtn = document.getElementById('bleSend');
 const bleStatusBadge = document.getElementById('bleStatusBadge');
 
 
+const bleSendPBContainer = document.getElementById('bleSendPBContainer');
+const bleSendProgressBar = document.getElementById('bleSendProgressBar');
+
+
 if (!('bluetooth' in navigator)) {
     clearClasses(bleStatusBadge, 'text-bg-');
     bleStatusBadge.classList.add('text-bg-danger');
@@ -70,12 +74,25 @@ bleSendBtn.addEventListener('click', async () => {
     let oldBtnCaption = bleSendBtn.textContent;
     bleSendBtn.disabled = true;
     try {
-        const chunkSize = 512;  // Максимальный размер пакета
+        const chunkSize = 495;  // Максимальный размер пакета
 
-        for (let i = 0; i < blackBits.length; i += chunkSize) {
-            let chunk = blackBits.slice(i, i + chunkSize);
+        bleSendPBContainer.classList.remove('d-none');
+
+        const data = new Uint8Array(blackBits.length + redBits.length);
+        data.set(blackBits);
+        data.set(redBits, blackBits.length);
+
+        for (let i = 0; i < data.length; i += chunkSize) {
+            let percent = Math.ceil(i / data.length * 100);
+            bleSendPBContainer.ariaValueNow = "" + percent;
+            bleSendProgressBar.style.width = `${percent}%`;
+            bleSendProgressBar.textContent = `${percent}%`;
+
+            let chunk = data.slice(i, i + chunkSize);
             await characteristic.writeValue(chunk);
         }
+
+        bleSendPBContainer.classList.add('d-none');
 
         bleSendBtn.textContent = '✅ Image sent';
         setTimeout(function() {
