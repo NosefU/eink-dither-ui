@@ -78,17 +78,32 @@ bleSendBtn.addEventListener('click', async () => {
 
         bleSendPBContainer.classList.remove('d-none');
 
-        const data = new Uint8Array(blackBits.length + redBits.length);
-        data.set(blackBits);
-        data.set(redBits, blackBits.length);
+        let reversedBlack = new Uint8Array(blackBits.length);
+        for (let i = 0; i < blackBits.length; i++) {
+            reversedBlack[i] = reverseBits(blackBits[i]);
+        }
+        let reversedRed = new Uint8Array(redBits.length);
+        for (let i = 0; i < redBits.length; i++) {
+            reversedRed[i] = reverseBits(redBits[i]);
+        }
 
-        for (let i = 0; i < data.length; i += chunkSize) {
-            let percent = Math.ceil(i / data.length * 100);
+        for (let i = 0; i < reversedBlack.length; i += chunkSize) {
+            let percent = Math.ceil(i / (reversedBlack.length + reversedRed.length) * 100);
             bleSendPBContainer.ariaValueNow = "" + percent;
             bleSendProgressBar.style.width = `${percent}%`;
             bleSendProgressBar.textContent = `${percent}%`;
 
-            let chunk = data.slice(i, i + chunkSize);
+            let chunk = reversedBlack.slice(i, i + chunkSize);
+            await characteristic.writeValue(chunk);
+        }
+
+        for (let i = 0; i < reversedRed.length; i += chunkSize) {
+            let percent = Math.ceil((i + reversedBlack.length) / (reversedBlack.length + reversedRed.length) * 100);
+            bleSendPBContainer.ariaValueNow = "" + percent;
+            bleSendProgressBar.style.width = `${percent}%`;
+            bleSendProgressBar.textContent = `${percent}%`;
+
+            let chunk = reversedRed.slice(i, i + chunkSize);
             await characteristic.writeValue(chunk);
         }
 
@@ -147,4 +162,13 @@ function getBitArraysFromCanvas(canvas) {
     }
 
     return { blackBits, redBits };
+}
+
+function reverseBits(byte) {
+    let reversed = 0;
+    for (let i = 0; i < 8; i++) {
+        reversed = (reversed << 1) | (byte & 1);
+        byte >>= 1;
+    }
+    return reversed;
 }
