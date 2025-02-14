@@ -4,6 +4,11 @@ const paletteRBW = [
     [255, 0, 0]      // Красный
 ];
 
+const paletteBW = [
+    [255, 255, 255], // Белый
+    [0, 0, 0],       // Чёрный
+];
+
 const paletteGBDMG01 = [
     [27, 42, 9],
     [14, 69, 11],
