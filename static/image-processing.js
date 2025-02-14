@@ -34,6 +34,8 @@ function handleImageUpload(event) {
       const y = (canvas.height - height) / 2;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "white";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, x, y, width, height);
 
       window.originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
